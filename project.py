@@ -136,6 +136,8 @@ seventhframe.place(x=805,y=325)
 day7=Label(seventhframe,bg="#282829",fg="#fff")
 day7.place(x=10,y=5)
 
+#Adarsh Agrahari
+
 seventhimage=Label(seventhframe,bg="#282829")
 seventhimage.place(x=7,y=20)
 
