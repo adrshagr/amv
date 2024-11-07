@@ -6,7 +6,7 @@ from timezonefinder import TimezoneFinder
 from datetime import *
 import requests
 import pytz
-from PIL import Image, ImageTK
+from PIL import Image, ImageTk
 
 
 root = Tk()
@@ -198,7 +198,7 @@ thirdframe.place(x=405,y=325)
 day3=Label(thirdframe,bg="#282829",fg="#fff")
 day3.place(x=10,y=5)
 
-thirdimage=Label(thirdimage,bg="#282829")
+thirdimage=Label(thirdframe,bg="#282829")
 thirdimage.place(x=7,y=20)
 
 #fourth cell
@@ -253,3 +253,43 @@ seventhimage.place(x=7,y=20)
 
 
 root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
