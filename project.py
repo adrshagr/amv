@@ -139,4 +139,4 @@ day7.place(x=10,y=5)
 seventhimage=Label(seventhframe,bg="#282829")
 seventhimage.place(x=7,y=20)
 
-
+#Intentionally Added Comment
