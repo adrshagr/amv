@@ -64,7 +64,7 @@ def getWeather():
 text_field = Entry(root, font=("arial", 14), bg="#ebebeb", fg="black")
 text_field.place(x=400, y=22)
 text_field.lower()
-text_field.bind("<Return>", getWeather()) #Bind the Enter key to the getWeather Function
+text_field.bind("<Return>", lambda event: getWeather()) #Bind the Enter key to the getWeather Function
 
 
 # Load the image and resize it
