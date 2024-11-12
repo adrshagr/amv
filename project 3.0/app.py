@@ -42,8 +42,9 @@ def getWeather():
         clock.config(text=current_time)
         name.config(text="CURRENT WEATHER")
 
-        # ADD YOUR OPENWEATHERMAP API KEY HERE
-        api_key = "45542413ab890ab8e14f84105db2c439"
+        # Added API Key here
+        api_key = "8a49d853e61614da31e7900027c646dd"
+        # api_key = "45542413ab890ab8e14f84105db2c439"
         api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
         json_data = requests.get(api).json()
         temperature = json_data['main']['temp'] - 273.15
@@ -64,7 +65,7 @@ def getWeather():
 text_field = Entry(root, font=("arial", 14), bg="#ebebeb", fg="black")
 text_field.place(x=400, y=22)
 text_field.lower()
-text_field.bind("<Return>", lambda event: getWeather()) #Bind the Enter key to the getWeather Function
+text_field.bind("<Return>", lambda event: getWeather()) #Binding the Enter key to the getWeather Function
 
 
 # Load the image and resize it
