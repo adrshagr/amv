@@ -5,11 +5,12 @@ from datetime import datetime
 import requests
 import pytz
 from tkinter import messagebox
-#from PIL import Image, ImageTk 
+#from PIL import Image, ImageTk     
 
 root = Tk()
-root.title("Weather Forecasting Application")
+root.title("Sky Watch")
 root.geometry("1000x500+200+100")
+root.configure(bg="#ebebeb")
 root.resizable(False, False)
 
 # Entry widget for user input
@@ -60,9 +61,10 @@ def getWeather():
 
 
 # Entry widget for user input
-text_field = Entry(root, font=("arial", 14))
+text_field = Entry(root, font=("arial", 14), bg="#ebebeb", fg="black")
 text_field.place(x=400, y=22)
 text_field.lower()
+text_field.bind("<Return>", getWeather()) #Bind the Enter key to the getWeather Function
 
 
 # Load the image and resize it
@@ -99,40 +101,40 @@ information_box.lower()
 """
 
 # Time
-name = Label(root, font=("arial", 15, "bold"))
+name = Label(root, font=("arial", 15, "bold"), bg="#ebebeb", fg="black")
 name.place(x=50, y=100)
-clock = Label(root, font=("Merriweather", 20))
+clock = Label(root, font=("Merriweather", 20), bg="#ebebeb", fg="black")
 clock.place(x=50, y=130)
 
 # LABEL
-label1 = Label(root, text="WIND", font=("Merriweather", 20, "bold"), fg="Black")
+label1 = Label(root, text="WIND", font=("Merriweather", 20, "bold"), bg="#ebebeb", fg="black")
 label1.place(x=50, y=350)
 
-label2 = Label(root, text="HUMIDITY", font=("Merriweather", 20, "bold"), fg="Black")
+label2 = Label(root, text="HUMIDITY", font=("Merriweather", 20, "bold"), bg="#ebebeb", fg="black")
 label2.place(x=270, y=350)  
 
-label3 = Label(root, text="DESCRIPTION", font=("Merriweather", 20, "bold"), fg="Black")
+label3 = Label(root, text="DESCRIPTION", font=("Merriweather", 20, "bold"), bg="#ebebeb", fg="black")
 label3.place(x=450, y=350)  
 
-label4 = Label(root, text="PRESSURE", font=("Merriweather", 20, "bold"), fg="Black")
+label4 = Label(root, text="PRESSURE", font=("Merriweather", 20, "bold"), bg="#ebebeb", fg="black")
 label4.place(x=720, y=350)  
 
 
-t = Label(font=("arial", 16, "bold"), fg="#ee666d")
+t = Label(font=("arial", 16, "bold"), bg="#ebebeb", fg="red")
 t.place(x=700, y=200)
-c = Label(font=("arial", 16, "bold"))
+c = Label(font=("arial", 16, "bold"), bg="#ebebeb", fg="black")
 c.place(x=700, y=250)
 # LABEL
-w = Label(text="...", font=("arial", 14))
+w = Label(text="...", font=("arial", 14), bg="#ebebeb", fg="black")
 w.place(x=50, y=380)  
 
-h = Label(text="...", font=("arial", 14))
+h = Label(text="...", font=("arial", 14), bg="#ebebeb", fg="black")
 h.place(x=270, y=380)  
 
-d = Label(text="...", font=("arial", 14))
+d = Label(text="...", font=("arial", 14), bg="#ebebeb", fg="black")
 d.place(x=450, y=380)  
 
-p = Label(text="...", font=("arial", 14))
+p = Label(text="...", font=("arial", 14), bg="#ebebeb", fg="black")
 p.place(x=720, y=380)  
 
 root.mainloop()
