@@ -6,6 +6,7 @@ import requests
 import pytz
 from tkinter import messagebox
 #from PIL import Image, ImageTk     
+import pygame
 
 root = Tk()
 root.title("Sky Watch")
@@ -25,7 +26,7 @@ custom_search_icon_black.save('custom_search_icon_black.png', 'PNG')
 
 image_search_icon_black = ImageTk.PhotoImage(file="custom_search_icon_black.png")
 """
-background_image = PhotoImage(file="back1.png")
+background_image = PhotoImage(file="c:/project final/back1.png")
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0, relwidth=1.0, relheight=1.0)
 
@@ -58,6 +59,9 @@ def getWeather():
         d.config(text=f"Description: {json_data['weather'][0]['description']}")
         p.config(text=f"Pressure: {json_data['main']['pressure']} hPa")
 
+        pygame.mixer.init()
+        pygame.mixer.music.load("bg_music.mp3")  # Replace with your audio file
+        pygame.mixer.music.play()
     except Exception as e:
         messagebox.showerror("Weather Forecasting Application", f"Error: {e}")
 
@@ -72,7 +76,7 @@ text_field.bind("<Return>", lambda event: getWeather()) #Binding the Enter key t
 
 
 # Load the image and resize it
-image_search_icon = PhotoImage(file="search1.png")
+image_search_icon = PhotoImage(file="c:/project final/search1.png")
 
 
 # Resize the image by a factor of 2 in both x and y directions (you can adjust the values as needed)
@@ -91,7 +95,7 @@ search_icon_button = Button(root, image=image_search_icon, borderwidth=0, cursor
 search_icon_button.place(x=599, y=23)
 
 # Add Weather Logo
-image_logo = PhotoImage(file="weather_logo1.png")
+image_logo = PhotoImage(file="c:/project final/weather_logo1.png")
 weather_logo = Label(image=image_logo)
 weather_logo.place(x=400, y=80)
 
@@ -105,42 +109,42 @@ information_box.lower()
 """
 
 # Time
-name = Label(root, font=("arial", 15, "bold"),bg="#ebebeb", fg="black")
+name = Label(root, font=("arial", 15, "bold"),bg = "#ebebeb", fg="black")
 name.place(x=50, y=100)
-clock = Label(root, font=("Merriweather", 20),bg="#ebebeb", fg="black")
+clock = Label(root, font=("Merriweather", 20),bg = "#ebebeb", fg="black")
 clock.place(x=50, y=130)
 
 # LABEL
-label1 = Label(root, text="WIND", font=("Merriweather", 20, "bold"),bg="#ebebeb", fg="black")
+label1 = Label(root, text="WIND", font=("Merriweather", 20, "bold"), fg="black")
 label1.place(x=50, y=350)
 
-label2 = Label(root, text="HUMIDITY", font=("Merriweather", 20, "bold"),bg="#ebebeb", fg="black")
+label2 = Label(root, text="HUMIDITY", font=("Merriweather", 20, "bold"), fg="black")
 label2.place(x=270, y=350)  
 
-label3 = Label(root, text="DESCRIPTION", font=("Merriweather", 20, "bold"),bg="#ebebeb", fg="black")
+label3 = Label(root, text="DESCRIPTION", font=("Merriweather", 20, "bold"), fg="black")
 label3.place(x=450, y=350)
 
 
-label4 = Label(root, text="PRESSURE", font=("Merriweather", 20, "bold"),bg="#ebebeb", fg="black")
+label4 = Label(root, text="PRESSURE", font=("Merriweather", 20, "bold"), fg="black")
 label4.place(x=720, y=350)  
 
 
-t = Label(font=("arial", 16, "bold"),bg="#ebebeb", fg="red")
+t = Label(font=("arial", 16, "bold"),bg = "#ebebeb" , fg="red")
 t.place(x=700, y=200)
-c = Label(font=("arial", 16, "bold"),bg="#ebebeb", fg="black")
+c = Label(font=("arial", 16, "bold"),bg = "#ebebeb", fg="black")
 c.place(x=700, y=250)
 # LABEL
-w = Label(text="...", font=("arial", 14),bg="#ebebeb", fg="black")
+w = Label(text="...", font=("arial", 14),bg = "#ebebeb", fg="black")
 w.place(x=50, y=380)  
 
-h = Label(text="...", font=("arial", 14),bg="#ebebeb", fg="black")
+h = Label(text="...", font=("arial", 14),bg = "#ebebeb", fg="black")
 h.place(x=270, y=380)  
 
-d = Label(text="...", font=("arial", 14),bg="#ebebeb", fg="black")
+d = Label(text="...", font=("arial", 14),bg = "#ebebeb", fg="black")
 d.place(x=450, y=380)
   
 
-p = Label(text="...", font=("arial", 14),bg="#ebebeb", fg="black")
+p = Label(text="...", font=("arial", 14),bg = "#ebebeb", fg="black")
 p.place(x=720, y=380)  
 
 
