@@ -4,36 +4,22 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
-from tkinter import messagebox
-#from PIL import Image, ImageTk     
+from tkinter import messagebox   
 import pygame
 
 root = Tk()
 root.title("Sky Watch")
 root.geometry("1000x500+200+100")
-# root.configure(bg="#ebebeb")
 root.resizable(False, False)
 
-# Entry widget for user input
-#text_field = Entry(root, font=("arial", 14))
-#text_field.place(x=20, y=20)
-
-
-# Create a custom search icon image with black color
-"""
-custom_search_icon_black = Image.new('RGBA', (16, 16), color=(0, 0, 0, 255))  # Black color (R, G, B, Alpha)
-custom_search_icon_black.save('custom_search_icon_black.png', 'PNG')
-
-image_search_icon_black = ImageTk.PhotoImage(file="custom_search_icon_black.png")
-"""
-background_image = PhotoImage(file="c:/project final/back1.png")
+background_image = PhotoImage(file="back1.png")
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0, relwidth=1.0, relheight=1.0)
 
 
 def getWeather():
     try:
-        city = text_field.get()  # Get user input from the Entry widget
+        city = text_field.get()
         geolocator = Nominatim(user_agent="geoapiExcercises")
         location = geolocator.geocode(city)
         obj = TimezoneFinder()
@@ -48,7 +34,6 @@ def getWeather():
 
         # Added API Key here
         api_key = "8a49d853e61614da31e7900027c646dd"
-        # api_key = "45542413ab890ab8e14f84105db2c439"
         api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
         json_data = requests.get(api).json()
         temperature = json_data['main']['temp'] - 273.15
@@ -60,53 +45,30 @@ def getWeather():
         p.config(text=f"Pressure: {json_data['main']['pressure']} hPa")
 
         pygame.mixer.init()
-        pygame.mixer.music.load("bg_music.mp3")  # Replace with your audio file
+        pygame.mixer.music.load("bg_music.mp3")  # Audio file
         pygame.mixer.music.play()
     except Exception as e:
         messagebox.showerror("Weather Forecasting Application", f"Error: {e}")
 
 
-
-
-# Entry widget for user input
 text_field = Entry(root, font=("arial", 14), bg="#808080", fg="white")
 text_field.place(x=400, y=22)
 
-text_field.bind("<Return>", lambda event: getWeather()) #Binding the Enter key to the getWeather Function
+text_field.bind("<Return>", lambda event: getWeather())
 
 
-# Load the image and resize it
-image_search_icon = PhotoImage(file="c:/project final/search1.png")
+image_search_icon = PhotoImage(file="search1.png")
 
 
-# Resize the image by a factor of 2 in both x and y directions (you can adjust the values as needed)
 image_search_icon = image_search_icon.subsample(10, 10)
 
-
-# Calculate the size for the icon based on the text_field's height
-#text_field_height = text_field.winfo_height()  # Get the height of the text_field
-#icon_height = text_field_height - 4  # Adjust the icon height as needed
-
-# Resize the image to match the calculated height
-#image_search_icon = image_search_icon.subsample(int(image_search_icon.width() / icon_height), int(image_search_icon.height() / icon_height))
-
-# Create a Button widget with the custom-sized search icon
 search_icon_button = Button(root, image=image_search_icon, borderwidth=0, cursor="hand2", command=getWeather)
 search_icon_button.place(x=599, y=23)
 
-# Add Weather Logo
-image_logo = PhotoImage(file="c:/project final/weather_logo1.png")
+# Logo here
+image_logo = PhotoImage(file="weather_logo1.png")
 weather_logo = Label(image=image_logo)
 weather_logo.place(x=400, y=80)
-
-# Add Information Box
-"""
-image_box = PhotoImage(file="information_box.png")
-information_box = Label(image=image_box, width=800, height=100)  
-information_box.pack(padx=5, pady=5, side=BOTTOM)
-information_box.place(x=40,y=330)
-information_box.lower()
-"""
 
 # Time
 name = Label(root, font=("arial", 15, "bold"),bg = "#ebebeb", fg="black")
