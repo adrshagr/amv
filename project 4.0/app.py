@@ -14,8 +14,6 @@ root.geometry("1000x500+200+100")
 root.resizable(False, False)
 # For voice 
 engine = pyttsx3.init()
-# voices = engine.getProperty('voices')
-# engine.setProperty('voice', voices[1].id)
 engine.setProperty('rate', 120)
 
 def speak_weather(city_searched, weather_condition, temperature_searched):
@@ -23,14 +21,14 @@ def speak_weather(city_searched, weather_condition, temperature_searched):
     engine.runAndWait()
 
 # Background image placeholders (replace with your image paths)
-background_image_default = PhotoImage(file="c:/project 4.0/default.png")
-background_image_clear = PhotoImage(file="c:/project 4.0/clear_sky.png") 
-background_image_mist = PhotoImage(file="c:/project 4.0/mist.png")  # New image for mist
-background_image_haze = PhotoImage(file="c:/project 4.0/haze.png")  # New image for haze
-background_image_overcast_clouds = PhotoImage(file="c:/project 4.0/overcast_clouds.png")  # New image for overcast clouds
-background_image_scattered_clouds = PhotoImage(file="c:/project 4.0/scattered_clouds.png")  # New image for scattered clouds
-background_image_rainy = PhotoImage(file="c:/project 4.0/rainy.png")  # New image for rainy
-background_image_snow = PhotoImage(file="c:/project 4.0/snow.png")  # New image for snow
+background_image_default = PhotoImage(file="weather/default.png")
+background_image_clear = PhotoImage(file="weather/clear_sky.png") 
+background_image_mist = PhotoImage(file="weather/mist.png")  # New image for mist
+background_image_haze = PhotoImage(file="weather/haze.png")  # New image for haze
+background_image_overcast_clouds = PhotoImage(file="weather/overcast_clouds.png")  # New image for overcast clouds
+background_image_scattered_clouds = PhotoImage(file="weather/scattered_clouds.png")  # New image for scattered clouds
+background_image_rainy = PhotoImage(file="weather/rainy.png")  # New image for rainy
+background_image_snow = PhotoImage(file="weather/snow.png")  # New image for snow
 
 # Create initial background label
 background_label = Label(root, image=background_image_default)
@@ -72,7 +70,7 @@ def getWeather(city=None):
         temperature_searched = temperature
         if (weather_condition == "clear sky"):
             background_label.config(image=background_image_clear)            
-        elif weather_condition in ["mist", "fog", "light fog", "heavy fog", "moderate fog"]:
+        elif weather_condition in ["mist", "fog", "light fog", "heavy fog", "moderate fog", "smoke"]:
             background_label.config(image=background_image_mist)
         elif(weather_condition == "haze"):
             background_label.config(image=background_image_haze)
@@ -90,9 +88,6 @@ def getWeather(city=None):
 
     except Exception as e:
         messagebox.showerror("Weather Forecasting Application", f"Error: {e}")
- 
-    # engine.say(f"The current weather condition for {city_searched} is {weather_condition} with temperature of {temperature_searched:.2f} degree celcius")
-    # engine.runAndWait() 
 
 def voice_search():
     recognizer = sr.Recognizer()
@@ -117,20 +112,20 @@ text_field.place(x=400, y=22)
 text_field.bind("<Return>", lambda event: getWeather(text_field.get()))
 
 
-image_search_icon = PhotoImage(file="c:/project 4.0/search1.png")
-voice_search_icon=PhotoImage(file="c:/project 4.0/voiceicon.png")
+image_search_icon = PhotoImage(file="search1.png")
+voice_search_icon=PhotoImage(file="voice.png")
 
 image_search_icon = image_search_icon.subsample(10, 10)
-
+voice_search_icon= voice_search_icon.subsample(10,10)
 search_icon_button = Button(root, image=image_search_icon, borderwidth=0, cursor="hand2", command=getWeather)
 search_icon_button.place(x=599, y=23)
 voice_search_button = Button(root, image=voice_search_icon, command=voice_search)
 voice_search_button.place(x=622 ,y=23)
 
 # Logo here
-image_logo = PhotoImage(file="c:/project 4.0/weather_logo1.png")
+image_logo = PhotoImage(file="weather_logo1.png")
 weather_logo = Label(image=image_logo)
-weather_logo.place(x=400, y=80)
+weather_logo.place(x=915, y=10)
 
 # Time
 name = Label(root, font=("arial", 15, "bold"),bg = "#ebebeb", fg="black")
