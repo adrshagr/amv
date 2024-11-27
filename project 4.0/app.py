@@ -5,34 +5,35 @@ from datetime import datetime
 import requests
 import pytz
 from tkinter import messagebox
-
 import pyttsx3
-
+import threading
 root = Tk()
 root.title("Sky Watch")
 root.geometry("1000x500+200+100")
 root.resizable(False, False)
-
-# Background image placeholders (replace with your image paths)
-background_image_default = PhotoImage(file="weather/default.png")
-background_image_clear = PhotoImage(file="weather/clear_sky.png") 
-background_image_mist = PhotoImage(file="weather/mist.png")  # New image for mist
-background_image_haze = PhotoImage(file="weather/haze.png")  # New image for haze
-background_image_overcast_clouds = PhotoImage(file="weather/overcast_clouds.png")  # New image for overcast clouds
-background_image_scattered_clouds = PhotoImage(file="weather/scattered_clouds.png")  # New image for scattered clouds
-background_image_rainy = PhotoImage(file="weather/rainy.png")  # New image for rainy
-background_image_snow = PhotoImage(file="weather/snow.png")  # New image for snow
-
-# Create initial background label
-background_label = Label(root, image=background_image_default)
-background_label.place(x=0, y=0, relwidth=1.0, relheight=1.0)
-
-
 # For voice 
 engine = pyttsx3.init()
 # voices = engine.getProperty('voices')
 # engine.setProperty('voice', voices[1].id)
 engine.setProperty('rate', 120)
+
+def speak_weather(city_searched, weather_condition, temperature_searched):
+    engine.say(f"The current weather condition for {city_searched} is {weather_condition} with temperature of {temperature_searched:.2f} degree Celsius")
+    engine.runAndWait()
+
+# Background image placeholders (replace with your image paths)
+background_image_default = PhotoImage(file="c:/project 4.0/default.png")
+background_image_clear = PhotoImage(file="c:/project 4.0/clear_sky.png") 
+background_image_mist = PhotoImage(file="c:/project 4.0/mist.png")  # New image for mist
+background_image_haze = PhotoImage(file="c:/project 4.0/haze.png")  # New image for haze
+background_image_overcast_clouds = PhotoImage(file="c:/project 4.0/overcast_clouds.png")  # New image for overcast clouds
+background_image_scattered_clouds = PhotoImage(file="c:/project 4.0/scattered_clouds.png")  # New image for scattered clouds
+background_image_rainy = PhotoImage(file="c:/project 4.0/rainy.png")  # New image for rainy
+background_image_snow = PhotoImage(file="c:/project 4.0/snow.png")  # New image for snow
+
+# Create initial background label
+background_label = Label(root, image=background_image_default)
+background_label.place(x=0, y=0, relwidth=1.0, relheight=1.0)
 
 
 def getWeather():
@@ -62,15 +63,12 @@ def getWeather():
         d.config(text=f"Description: {json_data['weather'][0]['description']}")
         p.config(text=f"Pressure: {json_data['main']['pressure']} hPa")
 
-
-
-
-        # Change background and voice based on weather condition
+        # Change background based on weather condition
         weather_condition = json_data['weather'][0]['description'].lower()
         city_searched = json_data['name'].lower()
         temperature_searched = temperature
         if (weather_condition == "clear sky"):
-            background_label.config(image=background_image_clear)
+            background_label.config(image=background_image_clear)            
         elif weather_condition in ["mist", "fog", "light fog", "heavy fog", "moderate fog"]:
             background_label.config(image=background_image_mist)
         elif(weather_condition == "haze"):
@@ -85,12 +83,14 @@ def getWeather():
             background_label.config(image=background_image_snow)
         else:
             background_label.config(image=background_image_default)
+        threading.Thread(target=speak_weather, args=(city_searched, weather_condition, temperature_searched)).start()
 
     except Exception as e:
         messagebox.showerror("Weather Forecasting Application", f"Error: {e}")
-    
-    engine.say(f"The current weather condition for {city_searched} is {weather_condition} with temperature of {temperature_searched:.2f} degree celcius")
-    engine.runAndWait() 
+ 
+    # engine.say(f"The current weather condition for {city_searched} is {weather_condition} with temperature of {temperature_searched:.2f} degree celcius")
+    # engine.runAndWait() 
+
 
 
 text_field = Entry(root, font=("arial", 14), bg="#808080", fg="white")
@@ -99,7 +99,7 @@ text_field.place(x=400, y=22)
 text_field.bind("<Return>", lambda event: getWeather())
 
 
-image_search_icon = PhotoImage(file="search1.png")
+image_search_icon = PhotoImage(file="c:/project 4.0/search1.png")
 
 
 image_search_icon = image_search_icon.subsample(10, 10)
@@ -108,7 +108,7 @@ search_icon_button = Button(root, image=image_search_icon, borderwidth=0, cursor
 search_icon_button.place(x=599, y=23)
 
 # Logo here
-image_logo = PhotoImage(file="weather_logo1.png")
+image_logo = PhotoImage(file="c:/project 4.0/weather_logo1.png")
 weather_logo = Label(image=image_logo)
 weather_logo.place(x=400, y=80)
 
