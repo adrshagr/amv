@@ -7,6 +7,7 @@ import pytz
 from tkinter import messagebox
 import pyttsx3
 import threading
+import speech_recognition as sr
 root = Tk()
 root.title("Sky Watch")
 root.geometry("1000x500+200+100")
@@ -36,7 +37,9 @@ background_label = Label(root, image=background_image_default)
 background_label.place(x=0, y=0, relwidth=1.0, relheight=1.0)
 
 
-def getWeather():
+def getWeather(city=None):
+    if city is None:
+        city = text_field.get()
     try:
         city = text_field.get()
         geolocator = Nominatim(user_agent="geoapiExcercises")
@@ -91,21 +94,38 @@ def getWeather():
     # engine.say(f"The current weather condition for {city_searched} is {weather_condition} with temperature of {temperature_searched:.2f} degree celcius")
     # engine.runAndWait() 
 
+def voice_search():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening for city name...")
+        audio = recognizer.listen(source)
+        try:
+            city = recognizer.recognize_google(audio)
+            print(f"You said: {city}")
+            text_field.delete(0, END)
+            text_field.insert(0, city)
+            getWeather(city)
+        except sr.UnknownValueError:
+            messagebox.showerror("Voice Search", "Sorry, I could not understand the audio.")
+        except sr.RequestError:
+            messagebox.showerror("Voice Search", "Could not request results from the speech recognition service.")
 
 
 text_field = Entry(root, font=("arial", 14), bg="#808080", fg="white")
 text_field.place(x=400, y=22)
 
-text_field.bind("<Return>", lambda event: getWeather())
+text_field.bind("<Return>", lambda event: getWeather(text_field.get()))
 
 
 image_search_icon = PhotoImage(file="c:/project 4.0/search1.png")
-
+voice_search_icon=PhotoImage(file="c:/project 4.0/voiceicon.png")
 
 image_search_icon = image_search_icon.subsample(10, 10)
 
 search_icon_button = Button(root, image=image_search_icon, borderwidth=0, cursor="hand2", command=getWeather)
 search_icon_button.place(x=599, y=23)
+voice_search_button = Button(root, image=voice_search_icon, command=voice_search)
+voice_search_button.place(x=622 ,y=23)
 
 # Logo here
 image_logo = PhotoImage(file="c:/project 4.0/weather_logo1.png")
